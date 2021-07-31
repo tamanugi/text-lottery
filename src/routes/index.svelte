@@ -3,8 +3,7 @@
   import LotteryItemInput from '$lib/compoents/LotteryItemInput.svelte';
   import { takeRandom } from '$lib/utils';
   import { fade } from 'svelte/transition';
-
-  let inputsText = 'item1\nitem2\nitem3';
+  import { lotteryItemStore } from '$lib/store';
 
   let result = null;
   let loading = false;
@@ -14,7 +13,7 @@
 
     setTimeout(() => {
       loading = true;
-      const splited = inputsText.split('\n');
+      const splited = $lotteryItemStore.split('\n');
       result = takeRandom(splited);
       loading = false;
     }, 300);
@@ -22,7 +21,7 @@
 </script>
 
 <div class="flex justify-center items-center flex-col">
-  <LotteryItemInput bind:value={inputsText} />
+  <LotteryItemInput bind:value={$lotteryItemStore} />
   <div class="mt-5">
     <LotteryButton on:click={lottery} text="抽選する" disabledText="抽選中..." disabled={loading} />
   </div>
