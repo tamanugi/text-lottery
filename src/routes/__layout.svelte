@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import '@fortawesome/fontawesome-free/js/fontawesome';
   import '@fortawesome/fontawesome-free/js/solid';
+  import '@fortawesome/fontawesome-free/js/brands';
   import '../app.postcss';
 
   let mounted = false;
@@ -21,8 +22,10 @@
   </main>
 
   <footer class="absolute bottom-0 w-full py-4 border-t-2 flex justify-center items-center">
-    抽選ツール created by <a href="https://github.com/tamanugi">@tamanugi</a>
+    抽選ツール created by &nbsp;<a href="https://github.com/tamanugi">@tamanugi</a>
     &nbsp; | &nbsp;
-    <a href="https://github.com/tamanugi/text-lottery">https://github.com/tamanugi/text-lottery</a>
+    <a href="https://github.com/tamanugi/text-lottery" target="_blank"
+      ><i class="fab fa-github" /></a
+    >
   </footer>
 {/if}
