@@ -10,6 +10,10 @@
   });
 </script>
 
+<svelte:head>
+  <title>抽選ツール</title>
+</svelte:head>
+
 {#if mounted}
   <main class="w-2/3 mx-auto mt-10">
     <h1 class="text-4xl text-center mb-10">抽選ツール</h1>
