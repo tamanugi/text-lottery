@@ -22,7 +22,7 @@
   </main>
 
   <footer class="absolute bottom-0 w-full py-4 border-t-2 flex justify-center items-center">
-    抽選ツール created by &nbsp;<a href="https://github.com/tamanugi">@tamanugi</a>
+    created by &nbsp;<a href="https://github.com/tamanugi">@tamanugi</a>
     &nbsp; | &nbsp;
     <a href="https://github.com/tamanugi/text-lottery" target="_blank"
       ><i class="fab fa-github" /></a
