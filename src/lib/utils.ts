@@ -1,3 +1,3 @@
-export function takeRandom(values: string[]): string {
+export function takeRandom(values: any[]): string {
   return values[Math.floor(Math.random() * values.length)];
 }

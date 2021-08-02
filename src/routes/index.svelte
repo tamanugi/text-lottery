@@ -1,9 +1,9 @@
 <script lang="ts">
-  import LotteryButton from '$lib/compoents/LotteryButton.svelte';
-  import LotteryItemInput from '$lib/compoents/LotteryItemInput.svelte';
   import { takeRandom } from '$lib/utils';
   import { fade } from 'svelte/transition';
   import { lotteryItemStore } from '$lib/store';
+  import LotteryItems from '$lib/compoents/molecules/LotteryItems.svelte';
+  import Button from '$lib/compoents/atoms/Button.svelte';
 
   let result = null;
   let loading = false;
@@ -13,22 +13,26 @@
 
     setTimeout(() => {
       loading = true;
-      const splited = $lotteryItemStore.split('\n');
-      result = takeRandom(splited);
+      const items = $lotteryItemStore.filter((item) => item.enabled);
+      result = takeRandom(items);
       loading = false;
-    }, 300);
+    }, 500);
   }
 </script>
 
 <div class="flex justify-center items-center flex-col">
-  <LotteryItemInput bind:value={$lotteryItemStore} />
+  <LotteryItems bind:items={$lotteryItemStore} />
+
   <div class="mt-5">
-    <LotteryButton on:click={lottery} text="抽選する" disabledText="抽選中..." disabled={loading} />
+    <Button on:click={lottery} bind:disabled={loading}>
+      抽選する
+      <span slot="disabled">抽選中...</span>
+    </Button>
   </div>
 
   {#if result}
     <div in:fade class="mt-10 text-6xl text-indigo-500">
-      {result}
+      {result.text}
     </div>
   {/if}
 </div>
