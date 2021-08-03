@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { takeRandom } from '$lib/utils';
+  import { takeRandom, shuffle } from '$lib/utils';
   import { fade } from 'svelte/transition';
   import { lotteryItemStore } from '$lib/store';
   import LotteryItems from '$lib/compoents/molecules/LotteryItems.svelte';
   import Button from '$lib/compoents/atoms/Button.svelte';
+  import { cubicOut } from 'svelte/easing';
 
   let result = null;
   let loading = false;
@@ -12,11 +13,24 @@
     loading = true;
 
     setTimeout(() => {
-      loading = true;
-      const items = $lotteryItemStore.filter((item) => item.enabled);
-      result = takeRandom(items);
+      result = true;
       loading = false;
-    }, 500);
+    }, 100);
+  }
+
+  function lotteryAnimation(node, option) {
+    let items = $lotteryItemStore.filter((item) => item.enabled && item.text);
+
+    items = shuffle(items);
+
+    return {
+      duration: 2000,
+      easing: cubicOut,
+      tick: (t) => {
+        const i = ~~(t * 100) % items.length;
+        node.textContent = items[i].text;
+      }
+    };
   }
 </script>
 
@@ -31,9 +45,7 @@
   </div>
 
   {#if result}
-    <div in:fade class="mt-10 text-6xl text-indigo-500">
-      {result.text}
-    </div>
+    <div in:lotteryAnimation class="mt-10 text-6xl text-indigo-500" />
   {/if}
 </div>
 
